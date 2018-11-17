@@ -2,14 +2,18 @@
 steps:
   # Install dependencies
   - name: node:11.1.0
+    id: update
     entrypoint: yarn
     args: ['install']
 
   # Build site
   - name: node:11.1.0
+    id: build
+    waitFor: ['update']
     entrypoint: yarn
     args: ['build']
 
-  # Deploy to bucket
+  # Deploy build artifact
   - name: 'gcr.io/cloud-builders/gsutil'
-    args: ['rsync', '-R', 'public', 'gs://carlos.run']
+    waitFor: ['build']
+    args: ['-m', 'rsync', '-r', '-d', 'public', 'gs://carlos.run']
