@@ -1,0 +1,15 @@
+---
+steps:
+  # Install dependencies
+  - name: node:11.1.0
+    entrypoint: yarn
+    args: ['install']
+
+  # Build site
+  - name: node:11.1.0
+    entrypoint: yarn
+    args: ['build']
+
+  # Deploy to bucket
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args: ['rsync', '-R', 'public', 'gs://carlos.run']
