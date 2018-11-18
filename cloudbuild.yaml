@@ -4,7 +4,7 @@ steps:
   - name: node:11.1.0
     id: update
     entrypoint: yarn
-    args: ['install']
+    args: ['--offline']
 
   # Build site
   - name: node:11.1.0
@@ -15,5 +15,6 @@ steps:
 
   # Deploy build artifact
   - name: 'gcr.io/cloud-builders/gsutil'
+    id: deploy
     waitFor: ['build']
     args: ['-m', 'rsync', '-r', '-d', 'public', 'gs://carlos.run']
