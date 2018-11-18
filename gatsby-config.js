@@ -1,10 +1,12 @@
+const compact = require('lodash/fp/compact');
+
 module.exports = {
   siteMetadata: {
     title: 'Carlos Antonio',
   },
-  plugins: [
+  plugins: compact([
     'gatsby-plugin-react-helmet',
-    {
+    process.env.NODE_ENV !== 'production' && {
       resolve: 'gatsby-plugin-eslint',
       options: {
         test: /\.js$|\.jsx$/,
@@ -39,5 +41,5 @@ module.exports = {
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',
-  ],
-}
+  ]),
+};

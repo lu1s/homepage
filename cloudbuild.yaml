@@ -4,6 +4,9 @@ steps:
   - name: node:11.1.0
     id: update
     entrypoint: yarn
+    args: ['install', '--production']
+    env:
+      - 'NODE_ENV=production'
 
   # Build site
   - name: node:11.1.0
@@ -11,13 +14,14 @@ steps:
     waitFor: ['update']
     entrypoint: yarn
     args: ['build']
+    env:
+      - 'NODE_ENV=production'
 
   # Deploy build artifact
   - name: 'gcr.io/cloud-builders/gsutil'
     id: deploy
     waitFor: ['build']
-    args: ['-m', 'cp', '-R', 'public', 'gs://carlos.run']
-    # args: ['-m', 'rsync', '-r', '-d', 'public', 'gs://carlos.run']
+    args: ['-m', 'cp', '-R', 'public/**', 'gs://carlos.run']
 
   # Upload build artifact to versioned subdirectory
   - name: 'gcr.io/cloud-builders/gsutil'
