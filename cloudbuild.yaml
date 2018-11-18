@@ -4,7 +4,6 @@ steps:
   - name: node:11.1.0
     id: update
     entrypoint: yarn
-    args: ['--offline']
 
   # Build site
   - name: node:11.1.0
