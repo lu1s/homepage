@@ -21,7 +21,11 @@ steps:
   - name: 'gcr.io/cloud-builders/gsutil'
     id: deploy
     waitFor: ['build']
-    args: ['-m', 'cp', '-R', 'public/**', 'gs://carlos.run']
+    entrypoint: bash
+    args:
+      - '-c'
+      - |
+        find public -name \* -print | gsutil -m cp -r -I gs://carlos.run
 
   # Upload build artifact to versioned subdirectory
   - name: 'gcr.io/cloud-builders/gsutil'
