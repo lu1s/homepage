@@ -27,6 +27,13 @@ const Layout = ({ children }) => (
           ]}
         >
           <html lang="en" />
+          {process.env.NODE_ENV === 'production' && (
+            <script>{`
+if (location.protocol !== 'https:') {
+ location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+}
+          `}</script>
+          )}
         </Helmet>
         <Header siteTitle={data.site.siteMetadata.title} />
         <div
