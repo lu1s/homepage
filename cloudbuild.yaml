@@ -27,7 +27,7 @@ steps:
         '-z',
         'js,css,html',
         '-r',
-        "'/workspace/public/**'",
+        '/workspace/public/*',
         'gs://carlos-run-artifacts/$REVISION_ID',
       ]
 
