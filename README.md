@@ -53,3 +53,7 @@ yarn develop
   12.  **`README.md`**: A text file containing useful reference information about your project.
 
   13.  **`yarn.lock`**: [Yarn](https://yarnpkg.com/) is a package manager alternative to npm. You can use either yarn or npm, though all of the Gatsby docs reference npm.  This file serves essentially the same purpose as `package-lock.json`, just for a different package management system.
+
+### Browsing the site
+* Go to `http://localhost:8000` for the site.
+* Go to `http://localhost:8000/___graphql` for the Graphql query composer.
